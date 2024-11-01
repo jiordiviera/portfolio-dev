@@ -1,15 +1,14 @@
 "use client";
 import React from "react";
-import {WavyBackground} from "@/components/ui/wavy-background";
-import {useTheme} from "next-themes"
-import {TypewriterEffectSmooth} from "@/components/ui/typerwriter-effect";
-import {HoverBorderGradient} from "@/components/ui/hover-border-gradient";
-import {AuroraBackground} from "@/components/ui/aurora-background";
+import { WavyBackground } from "@/components/ui/wavy-background";
+import { useTheme } from "next-themes";
+import { TypewriterEffectSmooth } from "@/components/ui/typerwriter-effect";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { motion } from "framer-motion";
-import {Button} from "@/components/ui/moving-border";
+import { Button } from "@/components/ui/moving-border";
 
 export function About() {
-    const {theme, setTheme} = useTheme();
+    const { theme, setTheme } = useTheme();
     const words = [
         {
             text: `Hi I'm`,
@@ -20,28 +19,38 @@ export function About() {
             className: "text-primary",
         },
     ];
+
     return (
         <AuroraBackground>
             <motion.div
-                initial={{ opacity: 0.0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{
-                    delay: 0.3,
-                    duration: 0.8,
+                    delay: 0.2,
+                    duration: 0.6,
                     ease: "easeInOut",
                 }}
-                className="relative flex flex-col gap-4 justify-center lg:px-56 px-12 pt-20 w-full max-h-24"
+                className="relative flex flex-col gap-6 justify-center px-6 md:px-20 lg:px-36 pt-24 w-full max-w-5xl mx-auto"
             >
-            <div className="text-3xl  font-bold md:text-4xl lg:text-7xl">
-                <TypewriterEffectSmooth className={"flex items-center"} words={words}/>
-            </div>
-            <p className="text-xl text-center md:text-start sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-4 text-foreground font-normal">
-                {`A fullstack laravel developer with a passion for programming,\n especially web development, and a strong interest in databases.`}
-            </p>
-                <div className="flex my-10">
-                    <Button linkDownload={"/download/CV.pdf"}
+                {/* Introduction avec effet de typewriter */}
+                <div className="text-4xl font-bold md:text-5xl lg:text-7xl text-center md:text-start">
+                    <TypewriterEffectSmooth
+                        className={"flex items-center"}
+                        words={words}
+                    />
+                </div>
+
+                {/* Description du profil */}
+                <p className="text-lg md:text-2xl lg:text-3xl text-center md:text-start mt-6 text-foreground/80 font-medium leading-relaxed">
+                    {`A fullstack Laravel developer with a passion for programming, web development, and a strong interest in databases.`}
+                </p>
+
+                {/* Bouton Télécharger CV */}
+                <div className="flex justify-center md:justify-start mt-10">
+                    <Button
+                        linkDownload="/download/CV.pdf"
                         borderRadius="1.75rem"
-                        className="bg-background text-foreground font-medium border-neutral-200 dark:border-slate-800"
+                        className="bg-primary text-background px-8 py-3 font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:bg-secondary shadow-lg"
                     >
                         {`Download My CV`}
                     </Button>

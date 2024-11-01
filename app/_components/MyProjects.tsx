@@ -5,56 +5,62 @@ import Image from "next/image";
 
 const content = [
     {
-        title: "Collaborative Editing",
+        title: "Laravel Log Cleaner",
         description:
-            "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+            "Un package Laravel qui automatise le nettoyage des fichiers de log pour maintenir un espace de stockage optimal. Compatible avec les versions de Laravel de 7 à 11, il permet de purger les logs en fonction d’une durée spécifiée.",
         content: (
             <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-                Collaborative Editing
-            </div>
-        ),
-    },
-    {
-        title: "Real time changes",
-        description:
-            "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
-        content: (
-            <div className="h-full w-full  flex items-center justify-center text-white">
                 <Image
-                    src="/linear.webp"
+                    src="/path/to/laravel-log-cleaner-image.jpg"
                     width={300}
                     height={300}
                     className="h-full w-full object-cover"
-                    alt="linear board demo"
+                    alt="Aperçu du package Laravel Log Cleaner"
                 />
             </div>
         ),
     },
     {
-        title: "Version control",
+        title: "Portfolio JD Devs",
         description:
-            "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+            "Un site personnel pour partager des projets, articles, et les dernières avancées professionnelles. Utilise Next.js, Tailwind CSS et Framer Motion pour une expérience utilisateur fluide et moderne.",
         content: (
-            <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
-                Version control
+            <div className="h-full w-full flex items-center justify-center text-white">
+                <Image
+                    src="/path/to/portfolio-image.jpg"
+                    width={300}
+                    height={300}
+                    className="h-full w-full object-cover"
+                    alt="Aperçu du portfolio JD Devs"
+                />
             </div>
         ),
     },
     {
-        title: "Running out of content",
+        title: "Livewire Task Automator",
         description:
-            "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+            "Un package Laravel conçu pour accélérer le développement en automatisant la création de modèles, composants Livewire, vues, et routes. Parfait pour les développeurs cherchant à optimiser leur workflow.",
+        content: (
+            <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
+                Livewire Task Automator
+            </div>
+        ),
+    },
+    {
+        title: "API Portfolio",
+        description:
+            "Une API RESTful pour récupérer les derniers articles et mises à jour de mon portfolio, facilitant l’intégration de mes publications dans d’autres plateformes comme GitHub.",
         content: (
             <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-                Running out of content
+                API Portfolio
             </div>
         ),
     },
 ];
-export const MyProjects =()=> {
+export const MyProjects = () => {
     return (
         <div>
             <StickyScroll content={content} />
         </div>
     );
-}
+};
