@@ -27,7 +27,7 @@ const content = [
         content: (
             <div className="h-full w-full flex items-center justify-center text-white">
                 <Image
-                    src="/path/to/portfolio-image.jpg"
+                    src="https://img.shields.io/packagist/dt/jiordiviera/laravel-log-cleaner?style=for-the-badge"
                     width={300}
                     height={300}
                     className="h-full w-full object-cover"

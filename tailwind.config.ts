@@ -67,6 +67,10 @@ const config = {
             animation: {
                 aurora: "aurora 60s linear infinite",
             },
+            fontFamily: {
+                poppins: "var(--font-poppins)",
+                heading:"var(--font-heading)"
+            },
             keyframes: {
                 aurora: {
                     from: {

@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
-import { WavyBackground } from "@/components/ui/wavy-background";
-import { useTheme } from "next-themes";
 import { TypewriterEffectSmooth } from "@/components/ui/typerwriter-effect";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { motion } from "framer-motion";
+import {motion, MotionProps} from "framer-motion";
 import { Button } from "@/components/ui/moving-border";
 
+
+export const MotionDiv: React.FC<MotionProps & React.HTMLProps<HTMLDivElement>> = motion.div;
 export function About() {
-    const { theme, setTheme } = useTheme();
     const words = [
         {
             text: `Hi I'm`,
@@ -20,9 +19,11 @@ export function About() {
         },
     ];
 
+
+
     return (
         <AuroraBackground>
-            <motion.div
+            <MotionDiv
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{
@@ -50,12 +51,12 @@ export function About() {
                     <Button
                         linkDownload="/download/CV.pdf"
                         borderRadius="1.75rem"
-                        className="bg-primary text-background px-8 py-3 font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:bg-secondary shadow-lg"
+                        className="px-8 py-3 font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-lg text-nowrap"
                     >
                         {`Download My CV`}
                     </Button>
                 </div>
-            </motion.div>
+            </MotionDiv>
         </AuroraBackground>
     );
 }

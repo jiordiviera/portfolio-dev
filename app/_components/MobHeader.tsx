@@ -15,7 +15,7 @@ export const MobHeader = () => {
 }
     const menuItems = [
         { name: 'Home', href: '/' },
-        { name: 'About', href: '/about' },
+        { name: 'My work', href: '/work' },
         { name: 'Contact', href: '/contact' },
     ]
     const socialLinks: SocialLink[] = [

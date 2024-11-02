@@ -8,12 +8,8 @@ import { FaGitlab } from "react-icons/fa"
 import { RiLinkedinBoxFill, RiTwitterXFill } from "react-icons/ri"
 import { Button } from "@/components/ui/button"
 import { LinkPreview } from "@/components/ui/link-preview"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
 
 type NavLink = {
   href: string
@@ -27,10 +23,11 @@ type SocialLink = {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ]
+
 
 const socialLinks: SocialLink[] = [
   { url: "https://www.linkedin.com/in/jiordi-viera/", icon: <RiLinkedinBoxFill />, imageSrc: "/images/linkedin.png" },
@@ -40,7 +37,7 @@ const socialLinks: SocialLink[] = [
 
 export const Header = () => {
   const { theme, setTheme } = useTheme()
-
+const pathname = usePathname()
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -50,13 +47,13 @@ export const Header = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center backdrop-blur bg-background/80 rounded-lg border border-border py-3 px-4">
-          <Link href="/" className="text-lg font-bold">
+          <Link href="/" className={cn("text-lg font-bold")}>
             Dev Jiordi
           </Link>
 
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="font-medium hover:text-primary transition-colors">
+              <Link key={link.href} href={link.href} className={cn("font-medium hover:text-primary transition-colors",pathname==link.href && "text-primary")}>
                 {link.label}
               </Link>
             ))}
