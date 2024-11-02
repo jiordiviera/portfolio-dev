@@ -1,20 +1,23 @@
 import { ImageResponse } from 'next/og'
-import { NextRequest } from 'next/server'
 import { Poppins } from 'next/font/google'
 
 export const runtime = 'edge'
 
+// Image metadata
+export const alt = 'About Acme'
+export const size = {
+  width: 1200,
+  height: 630,
+}
+
+export const contentType = 'image/png'
 const poppins = Poppins({ subsets: ['latin'],weight:["900"] })
 
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url)
-    const hasTitle = searchParams.has('title')
-    const title = hasTitle
-      ? searchParams.get('title')?.slice(0, 100)
-      : 'JV'
+// Image generation
+export default async function Image() {
+const title = 'JV'
 
-    return new ImageResponse(
+   return new ImageResponse(
       (
         <div
           style={{
@@ -51,10 +54,4 @@ export async function GET(request: NextRequest) {
         height: 1200,
       }
     )
-  } catch (e: any) {
-    console.log(`${e.message}`)
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    })
-  }
 }

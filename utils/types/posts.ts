@@ -8,7 +8,8 @@ export interface PostsInterface{
     "published_at": string,
     "views_count": number,
     "read_time":number,
-    "media":Media[]
+    "media": Media[],
+    "comments":CommentInterface[]
 }
 
 interface Media{

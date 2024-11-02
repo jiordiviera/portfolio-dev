@@ -6,6 +6,7 @@ import { PostMetadata } from '@/components/ui/PostMetadata';
 import { CommentList } from '@/components/ui/CommentList';
 import { fetchPost } from '@/lib/api';
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
+import PageProps  from 'next';
 
 const PostSkeleton = () => (
     <div className="animate-pulse space-y-8">
@@ -67,21 +68,31 @@ async function PostDetail({ slug }: { slug: string }) {
         </article>
     );
 }
-
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ slug: string }>
+}) {
+   const slug = (await params).slug
     return (
         <section className="py-10 lg:py-24">
             <div className="container px-4">
                 <Suspense fallback={<PostSkeleton />}>
-                    <PostDetail slug={params.slug} />
+                    <PostDetail slug={slug} />
                 </Suspense>
             </div>
         </section>
     );
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const post = await fetchPost(params.slug);
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>
+}) {
+    const slug = (await params).slug
+    const post = await fetchPost(slug);
 
     if (!post) {
         return {
