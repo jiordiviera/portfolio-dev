@@ -111,7 +111,7 @@ const PostSkeleton = () => (
 
 export default function Page() {
     return (
-        <section className="py-20 lg:pt-40 lg:pb-10">
+        <section className="py-24 lg:pt-40 lg:pb-10">
             <div
                 className="container px-4 mx-auto">
                 <div className="relative mb-12 text-center">

@@ -8,7 +8,6 @@ export default function Home() {
     return (
         <main className="flex h-full flex-col items-center justify-between lg:px-24 px-12">
             <About/>
-            {/* <MyProjects/> */}
         </main>
     );
 }

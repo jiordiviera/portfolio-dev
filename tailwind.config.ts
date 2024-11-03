@@ -69,7 +69,8 @@ const config = {
             },
             fontFamily: {
                 poppins: "var(--font-poppins)",
-                heading:"var(--font-heading)"
+                heading:"var(--font-heading)",
+                mono:"var(--font-mono)"
             },
             keyframes: {
                 aurora: {

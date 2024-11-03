@@ -37,7 +37,7 @@ async function PostDetail({ slug }: { slug: string }) {
                     src={`https://my.jd-devs.com/${post.media[0].original_url}`}
                     alt={post.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 transform group-hover:scale-105"
                     priority
                 />
             </div>
@@ -75,7 +75,7 @@ export default async function Page({
 }) {
    const slug = (await params).slug
     return (
-        <section className="py-10 lg:py-24">
+        <section className="py-24 lg:pt-40 lg:pb-10">
             <div className="container px-4">
                 <Suspense fallback={<PostSkeleton />}>
                     <PostDetail slug={slug} />

@@ -1,17 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ClipboardIcon, CheckIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { JetBrains_Mono } from 'next/font/google'
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {CheckIcon, ClipboardIcon} from "lucide-react"
+import {Button} from "@/components/ui/button"
+import {Card, CardContent} from "@/components/ui/card"
 import useSound from 'use-sound'
-import { toast } from 'sonner'
+import {toast} from 'sonner'
 
-const jetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 interface MarkdownRendererProps {
   content: string
@@ -46,9 +43,7 @@ export default function MarkdownRenderer({ content, copySoundPath = '/copy-sound
       }
     })
   }, [playCopySound])
-const { oneDark } = require('react-syntax-highlighter/dist/esm/styles/prism');
-
-  const theme = oneDark;
+const { vscDarkPlus } = require('react-syntax-highlighter/dist/esm/styles/prism');
 
   return (
     <Card className="w-full shadow-lg">
@@ -73,9 +68,9 @@ const { oneDark } = require('react-syntax-highlighter/dist/esm/styles/prism');
 
               return match ? (
                 <div className="relative my-6">
-                  <div className={`${jetBrainsMono.className} text-sm`}>
+                  <div className={`text-sm`}>
                     <SyntaxHighlighter
-                      style={theme}
+                      style={vscDarkPlus}
                       language={match[1]}
                       PreTag="div"
                       className="rounded-md"
@@ -99,7 +94,7 @@ const { oneDark } = require('react-syntax-highlighter/dist/esm/styles/prism');
                   </Button>
                 </div>
               ) : (
-                <code className={`${jetBrainsMono.className} relative roundedpx-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold`} {...props}>
+                <code className={`relative roundedpx-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold`} {...props}>
                   {children}
                 </code>
               )
