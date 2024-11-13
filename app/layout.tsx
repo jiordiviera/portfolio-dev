@@ -3,10 +3,12 @@ import type {Metadata} from "next";
 import {Bricolage_Grotesque, JetBrains_Mono, Poppins} from "next/font/google";
 import "./globals.css";
 import {Header} from "@/app/_components/Header";
-import {MobHeader} from "@/app/_components/MobHeader";
+import {Footer} from "@/app/_components/Footer";
+import {MobHeader} from "@/components/mob-header";
 import {ThemeProvider} from "@/components/theme-provider";
 import {cn} from "@/utils/cn";
 import {Toaster} from "@/components/ui/sonner";
+import { PageTransition } from "@/components/PageTransition";
 
 const poppins = Poppins(
     {
@@ -31,8 +33,20 @@ const jetBrainsMono = JetBrains_Mono(
 
 
 export const metadata: Metadata = {
-    description: "I am jiordi viera",
-};
+  title: 'Jiordi Viera | Fullstack Laravel Developer',
+  description: 'Portfolio of Jiordi Viera, a passionate fullstack Laravel developer specializing in web development and database design.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://devjiordi.vercel.app',
+    siteName: 'Jiordi Viera Portfolio',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@jiordi_kengne',
+    creator: '@jiordi_kengne',
+  },
+}
 
 export default function RootLayout({
                                        children,
@@ -41,14 +55,20 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={cn(poppins.className, bricolageGrotesque.variable, jetBrainsMono.variable,'overflow-x-hidden' +
-            ' scroll-smooth')}>
-        <ThemeProvider attribute="class">
+        <body className={cn(poppins.className, bricolageGrotesque.variable, jetBrainsMono.variable,'overflow-x-hidden scroll-smooth')}>
+                <ThemeProvider attribute="class"
+                defaultTheme="system"
+          enableSystem
+                    disableTransitionOnChange
+                >
             <Header/>
-            <MobHeader/>
-            {children}
-        </ThemeProvider>
+                    <PageTransition>
+                        {children}
+                        </PageTransition>
+                    <MobHeader />
+                    <Footer/>
         <Toaster/>
+        </ThemeProvider>
         </body>
         </html>
     );

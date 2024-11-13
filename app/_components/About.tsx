@@ -1,62 +1,88 @@
-"use client";
-import React from "react";
-import { TypewriterEffectSmooth } from "@/components/ui/typerwriter-effect";
-import { AuroraBackground } from "@/components/ui/aurora-background";
-import {motion, MotionProps} from "framer-motion";
-import { Button } from "@/components/ui/moving-border";
+'use client'
 
+import React from "react"
+import { motion } from "framer-motion"
+import { TypewriterEffectSmooth } from "@/components/ui/typerwriter-effect"
+import { Button } from "@/components/ui/button"
+import {FaLaravel,FaDatabase,FaGit,FaReact} from "react-icons/fa"
 
-export const MotionDiv: React.FC<MotionProps & React.HTMLProps<HTMLDivElement>> = motion.div;
 export function About() {
     const words = [
         {
-            text: `Hi I'm`,
-            className: "text-foreground/60",
+            text: "Hi, I'm",
+            className: "text-foreground/80",
         },
         {
             text: "Jiordi Viera",
-            className: "text-primary",
+            className: "text-primary font-bold",
         },
-    ];
+    ]
 
-
+    const skills = [
+        { name: "Laravel", icon: <FaLaravel />, color: "text-red-600" },
+        { name: "React.js", icon: <FaReact />, color: "text-green-500" },
+        { name: "MySQL", icon: <FaDatabase />, color: "text-blue-500" },
+        // { name: "RESTful APIs", icon: <Api />, color: "text-purple-500" },
+        { name: "Git", icon: <FaGit />, color: "text-orange-500" },
+    ]
 
     return (
-        <AuroraBackground>
-            <MotionDiv
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                    delay: 0.2,
-                    duration: 0.6,
-                    ease: "easeInOut",
-                }}
-                className="relative flex flex-col gap-6 justify-center px-6 md:px-20 lg:px-36 pt-24 w-full max-w-5xl mx-auto"
+        <section className="flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-background">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-3xl mx-auto text-center"
             >
-                {/* Introduction avec effet de typewriter */}
-                <div className="text-4xl font-bold md:text-5xl lg:text-7xl text-center md:text-start">
-                    <TypewriterEffectSmooth
-                        className={"flex items-center"}
-                        words={words}
-                    />
+                <div className="mb-8">
+                    <TypewriterEffectSmooth words={words} />
                 </div>
 
-                {/* Description du profil */}
-                <p className="text-lg md:text-2xl lg:text-3xl text-center md:text-start mt-6 text-foreground/80 font-medium leading-relaxed">
-                    {`A fullstack Laravel developer with a passion for programming, web development, and a strong interest in databases.`}
-                </p>
+                <motion.h2
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    className="text-2xl md:text-3xl font-semibold mb-4 text-foreground/90"
+                >
+                    Fullstack Laravel Developer
+                </motion.h2>
 
-                {/* Bouton Télécharger CV */}
-                <div className="flex justify-center md:justify-start mt-10">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6, duration: 0.6 }}
+                    className="text-lg md:text-xl text-foreground/70 mb-8"
+                >
+                    Passionate about creating robust web applications with a focus on clean code and optimal database design. Experienced in building scalable solutions and continuously learning new technologies.
+                </motion.p>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 0.6 }}
+                    className="flex flex-wrap justify-center gap-4 mb-8"
+                >
+                    {skills.map((skill, index) => (
+                        <div key={index} className={`flex items-center gap-2 bg-background border border-border rounded-full px-4 py-2 text-sm ${skill.color}`}>
+                            {skill.icon}
+                            {skill.name}
+                        </div>
+                    ))}
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.6 }}
+                >
                     <Button
-                        linkDownload="/download/CV.pdf"
-                        borderRadius="1.75rem"
-                        className="px-8 py-3 font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-lg text-nowrap"
+                        asChild
+                        className="px-6 py-2 text-lg font-semibold transition-all duration-300 hover:scale-105"
                     >
-                        {`Download My CV`}
+                        <a href="/download/CV.pdf" download>Download My CV</a>
                     </Button>
-                </div>
-            </MotionDiv>
-        </AuroraBackground>
-    );
+                </motion.div>
+            </motion.div>
+        </section>
+    )
 }

@@ -1,7 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains:["api.microlink.io","my.jd-devs.com","img.shields.io"]
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+                port: '3000',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'api.microlink.io',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'my.jd-devs.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'img.shields.io',
+                port: '',
+                pathname: '/**'
+            },
+        ],
     }
 };
 

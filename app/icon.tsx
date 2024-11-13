@@ -4,7 +4,7 @@ import { Poppins } from 'next/font/google'
 export const runtime = 'edge'
 
 // Image metadata
-export const alt = 'About Acme'
+export const alt = 'About Jiordi'
 export const size = {
   width: 1200,
   height: 630,

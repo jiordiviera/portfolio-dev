@@ -100,7 +100,6 @@ export async function generateMetadata({
             description: 'Le post demandé n\'existe pas'
         };
     }
-
     return {
         title: post.title,
         description: post.description.substring(0, 160),
@@ -111,5 +110,14 @@ export async function generateMetadata({
                 url: `https://my.jd-devs.com/${post.media[0].original_url}`,
             }],
         },
+        twitter: {
+    card: 'summary_large_image',
+    title: post.title,
+    description: post.description.substring(0, 160),
+            images: [
+                `https://my.jd-devs.com/${post.media[0].original_url}`,
+            ],
+    creator: '@jiordi_kengne',
+  },
     };
 }

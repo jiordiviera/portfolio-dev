@@ -7,6 +7,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'My Skills | Dev Jiordi',
+  description: 'Discover my web development skills, including React, Laravel, and more.',
+  openGraph: {
+    title: 'Dev Jiordi\'s Skills',
+    description: 'Explore my frontend and backend development skills.',
+    images: [
+      {
+        url: 'https://avatars.githubusercontent.com/u/157500676?s=400&u=00a0ae84bfaa668d379a6965db132d29d3f82f2b&v=4',
+        width: 400,
+        height: 400,
+        alt: 'Dev Jiordi',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dev Jiordi\'s Skills',
+    description: 'Discover my web development skills and recent projects.',
+    images: ['https://avatars.githubusercontent.com/u/56254853'],
+    creator: '@jiordi_kengne',
+  },
+}
 
 async function fetchArticles() {
     try {
