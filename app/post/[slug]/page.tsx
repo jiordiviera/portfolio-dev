@@ -34,7 +34,7 @@ async function PostDetail({ slug }: { slug: string }) {
         <article className="max-w-4xl mx-auto">
             <div className="relative aspect-video mb-8 rounded-xl overflow-hidden shadow-xl">
                 <Image
-                    src={`https://my.jd-devs.com/${post.media[0].original_url}`}
+                    src={`https://my.jd-devs.com/${post.media_url}`}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform duration-700 transform group-hover:scale-105"
@@ -107,7 +107,7 @@ export async function generateMetadata({
             title: post.title,
             description: post.description.substring(0, 160),
             images: [{
-                url: `https://my.jd-devs.com/${post.media[0].original_url}`,
+                url: `https://my.jd-devs.com/${post.media_url}`,
             }],
         },
         twitter: {
@@ -115,7 +115,7 @@ export async function generateMetadata({
     title: post.title,
     description: post.description.substring(0, 160),
             images: [
-                `https://my.jd-devs.com/${post.media[0].original_url}`,
+                `https://my.jd-devs.com/${post.media_url}`,
             ],
     creator: '@jiordi_kengne',
   },
