@@ -7,8 +7,15 @@ import { fr } from 'date-fns/locale'
 import { PostsInterface } from '@/utils/types/posts'
 
 export default function PostCard({ post }: { post: PostsInterface }) {
+    console.log(post.published_at)
+    let formattedDate = "";
+    if (post.published_at) {
+
     const date = parseISO(post.published_at)
-    const formattedDate = format(date, "d MMMM yyyy 'à' HH'h'mm", { locale: fr })
+    formattedDate = format(date, "d MMMM yyyy 'to' HH'h'mm", { locale: fr })
+    } else {
+        formattedDate = "";
+    }
 
     return (
         <div className="group overflow-hidden transition-all duration-300 bg-white shadow-md dark:bg-gray-800 rounded-xl hover:shadow-xl">
@@ -50,7 +57,7 @@ export default function PostCard({ post }: { post: PostsInterface }) {
                     href={`/post/${post.slug}`}
                     className="inline-flex items-center text-sm font-medium text-primary hover:text-primary-dark transition-colors duration-300"
                 >
-                    Lire la suite
+                    Read more
                     <svg
                         className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
                         fill="none"

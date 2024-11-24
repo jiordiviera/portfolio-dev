@@ -83,7 +83,7 @@ const SkillLevel = ({ level }: { level: string }) => {
 
 export default function SkillsPage() {
   return (
-    <div className="container mx-auto px-4 py-24 lg:pt-40 lg:pb-10">
+    <div className="container mx-auto px-4 ">
       <h1 className="text-4xl font-bold mb-8 text-center">My Skills</h1>
       <div className="grid gap-8 md:grid-cols-2">
         {skillCategories.map((category) => (

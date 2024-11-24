@@ -1,12 +1,11 @@
-import { Suspense } from 'react';
+import { CommentList } from '@/components/ui/CommentList';
+import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
+import { PostMetadata } from '@/components/ui/PostMetadata';
+import { Skeleton } from '@/components/ui/skeleton';
+import { fetchPost } from '@/lib/api';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Skeleton } from '@/components/ui/skeleton';
-import { PostMetadata } from '@/components/ui/PostMetadata';
-import { CommentList } from '@/components/ui/CommentList';
-import { fetchPost } from '@/lib/api';
-import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
-import PageProps  from 'next';
+import { Suspense } from 'react';
 
 const PostSkeleton = () => (
     <div className="animate-pulse space-y-8">
@@ -75,7 +74,7 @@ export default async function Page({
 }) {
    const slug = (await params).slug
     return (
-        <section className="py-24 lg:pt-40 lg:pb-10">
+        <section className="">
             <div className="container px-4">
                 <Suspense fallback={<PostSkeleton />}>
                     <PostDetail slug={slug} />

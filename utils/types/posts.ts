@@ -1,6 +1,5 @@
 export interface PostsInterface{
     id: number,
-    "user_id": number,
     "title": string,
     "slug": string,
     "description": string,

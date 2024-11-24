@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Package } from 'lucide-react'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { ExternalLink, Github, Package } from 'lucide-react'
 import Image from "next/image"
 
 export default function Component() {
@@ -23,7 +23,7 @@ export default function Component() {
   ]
 
     return (
-      <section className="py-24 lg:pt-40 lg:pb-10">
+      <section className="">
     <div className="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-secondary/20">
       <div className="max-w-3xl mx-auto text-center mb-16">
         <h1 className="text-4xl font-bold mb-4">Laravel Packages</h1>
