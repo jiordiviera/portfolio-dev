@@ -1,7 +1,7 @@
 'use client'
 import { Calendar, Eye, Clock } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enGB } from 'date-fns/locale';
 
 interface PostMetadataProps {
     publishedAt: string;
@@ -10,7 +10,7 @@ interface PostMetadataProps {
 }
 
 export function PostMetadata({ publishedAt, viewsCount, readTime }: PostMetadataProps) {
-    const formattedDate = format(parseISO(publishedAt), "d MMMM yyyy 'à' HH'h'mm", { locale: fr });
+    const formattedDate = format(parseISO(publishedAt), "d MMMM yyyy 'at' HH'h'mm", { locale: enGB });
 
     return (
         <div className="flex flex-wrap gap-4 md:gap-6 text-gray-600 dark:text-gray-400">

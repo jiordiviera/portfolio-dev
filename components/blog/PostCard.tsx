@@ -3,19 +3,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { Calendar } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
-import { fr } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 import { PostsInterface } from '@/utils/types/posts'
+import { PostResponse } from '@/redux/slices/posts/postsSlice'
 
-export default function PostCard({ post }: { post: PostsInterface }) {
-    console.log(post.published_at)
-    let formattedDate = "";
-    if (post.published_at) {
-
+export default function PostCard({ post }: { post: PostResponse }) {
     const date = parseISO(post.published_at)
-    formattedDate = format(date, "d MMMM yyyy 'to' HH'h'mm", { locale: fr })
-    } else {
-        formattedDate = "";
-    }
+    const formattedDate = format(date, "d MMMM yyyy 'to' HH'h'mm", { locale: enUS })
 
     return (
         <div className="group overflow-hidden transition-all duration-300 bg-white shadow-md dark:bg-gray-800 rounded-xl hover:shadow-xl">

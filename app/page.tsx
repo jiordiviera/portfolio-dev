@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         url: 'https://avatars.githubusercontent.com/u/157500676?s=400&u=00a0ae84bfaa668d379a6965db132d29d3f82f2b&v=4',
         width: 400,
         height: 400,
-        alt: 'Dev Jiordi',
+        alt: 'Jiordi Viera',
       },
     ],
   },
@@ -27,8 +27,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between">
             <About/>
-        </main>
     )
 }

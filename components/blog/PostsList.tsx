@@ -1,10 +1,10 @@
 "use client"
-import { PostsSkeletonList } from '@/app/(blogs)/blog/page'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { fetchPosts } from '@/redux/slices/posts/postsSlice'
+import { fetchPosts,PostResponse } from '@/redux/slices/posts/postsSlice'
 import { PostsInterface } from '@/utils/types/posts'
 import { useEffect, useCallback } from 'react'
 import PostCard from './PostCard'
+import { PostsSkeletonList } from './PostsSkeletonList'
 
 export function PostsList() {
     const dispatch = useAppDispatch()
@@ -38,8 +38,8 @@ export function PostsList() {
 
         return (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {posts.map((post: PostsInterface) => (
-                    <PostCard key={post.id} post={post} />
+                {posts.map((post: PostResponse) => (
+                    <PostCard key={post._id} post={post} />
                 ))}
             </div>
         )

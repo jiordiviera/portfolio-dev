@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -27,17 +28,16 @@ export function Contact() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
     try {
-      // Here you would typically send the data to your backend
-      // For this example, we'll simulate an API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // TODO: Here you would typically send the data to your backend
+      await new Promise(resolve => setTimeout(resolve, 2000)) // Simulating API call
 
-      toast.success("Message sent!",{
+      toast.success("Message sent!", {
         description: "Thank you for your message. I'll get back to you soon.",
       })
       reset()
     } catch (error) {
-      toast.error("Error",{
-        description: "There was a problem sending your message. Please try again."
+      toast.error("Error", {
+        description: "There was a problem sending your message. Please try again.",
       })
     } finally {
       setIsSubmitting(false)
@@ -45,49 +45,78 @@ export function Contact() {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-background">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+      <motion.main
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="container mx-auto flex flex-col items-center justify-center px-4 py-12 bg-background"
       >
-        <h1 className="text-3xl font-bold text-center mb-8 text-foreground">Get in Touch</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <header className="mb-12 text-center">
+          <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="font-heading text-4xl font-bold tracking-tight sm:text-5xl"
+          >
+            Get in Touch
+          </motion.h1>
+          <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="mt-4 text-lg text-muted-foreground"
+          >
+            Have a question or want to work together? Let&#39;s connect!
+          </motion.p>
+        </header>
+        <motion.form
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6 w-full max-w-md"
+        >
           <div>
             <Input
-              {...register("name")}
-              placeholder="Your Name"
-              className={errors.name ? "border-red-500" : ""}
+                {...register("name")}
+                placeholder="Your Name"
+                className={errors.name ? "border-red-500" : ""}
             />
             {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
           </div>
           <div>
             <Input
-              {...register("email")}
-              type="email"
-              placeholder="Your Email"
-              className={errors.email ? "border-red-500" : ""}
+                {...register("email")}
+                type="email"
+                placeholder="Your Email"
+                className={errors.email ? "border-red-500" : ""}
             />
             {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
           </div>
           <div>
             <Textarea
-              {...register("message")}
-              placeholder="Your Message"
-              className={errors.message ? "border-red-500" : ""}
+                {...register("message")}
+                placeholder="Your Message"
+                className={errors.message ? "border-red-500" : ""}
             />
             {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
           </div>
           <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting}
+              type="submit"
+              className="w-full"
+              disabled={isSubmitting}
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
+            {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+            ) : (
+                'Send Message'
+            )}
           </Button>
-        </form>
-      </motion.div>
-    </section>
+        </motion.form>
+      </motion.main>
   )
 }
+

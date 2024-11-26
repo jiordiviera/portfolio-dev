@@ -22,15 +22,14 @@ export default function Component() {
     }
   ]
 
-    return (
-      <section className="">
-    <div className="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-secondary/20">
-      <div className="max-w-3xl mx-auto text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4">Laravel Packages</h1>
-        <p className="text-xl text-muted-foreground">
+  return (
+    <main className="container mx-auto px-4">
+      <header className="mb-12 text-center">
+        <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl">Laravel Packages</h1>
+        <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400 tracking-tight">
           Discover the tools I&apos;ve crafted to enhance Laravel development
         </p>
-      </div>
+      </header>
       <div className="grid gap-8 md:grid-cols-2">
         {packages.map((pkg, index) => (
           <Card key={index} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -79,7 +78,6 @@ export default function Component() {
           </a>
         </Button>
       </div>
-            </div>
-            </section>
+            </main>
   )
 }

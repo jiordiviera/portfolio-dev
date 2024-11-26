@@ -53,7 +53,7 @@ const getTechnologyColor = (tech: string) => {
 // Fetch Projects with Error Handling
 async function fetchProjects() {
     try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API_URL+'/projects', {
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL_PHP+'/projects', {
             next: { revalidate: 3600 }, // Cache for 1 hour
             cache: 'force-cache'
         });
@@ -144,8 +144,7 @@ const ProjectsList = async () => {
 
 export default async function Page() {
     return (
-        <section className="py-24">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <main className="container mx-auto">
                 <header className="max-w-2xl mx-auto text-center">
                     <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl">
                         Projects
@@ -165,7 +164,6 @@ export default async function Page() {
                         <ProjectsList />
                     </Suspense>
                 </div>
-            </div>
-        </section>
+            </main>
     );
 }

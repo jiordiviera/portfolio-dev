@@ -2,28 +2,27 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useAppDispatch } from '@/redux/hooks';
 import { createPost, IPostData } from '@/redux/slices/posts/postsSlice';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { X, Upload } from 'lucide-react';
 import Image from 'next/image';
+import MDEditor from '@uiw/react-md-editor';
 
 interface FormInputs {
   title: string;
   description: string;
-  excerpt: string;
   file: FileList;
 }
 
 export default function NewPostPage() {
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<FormInputs>();
+  const { register, handleSubmit, formState: { errors }, watch, setValue, control } = useForm<FormInputs>();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -57,8 +56,12 @@ export default function NewPostPage() {
   };
 
   const removeImage = () => {
-    setValue('file', undefined);
+    setValue('file', {} as FileList);
     setImagePreview(null);
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
   };
 
   const onSubmit = async (data: FormInputs) => {
@@ -87,116 +90,129 @@ export default function NewPostPage() {
 
   return (
     <ProtectedRoute>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold mb-4">Créer un nouveau post</h1>
+      <div className="container mx-auto px-4 py-8 max-w-3xl">
+        <h1 className="text-3xl font-bold mb-6">Créer un nouveau post</h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <Label htmlFor="title">Titre</Label>
-            <Input
-              id="title"
-              {...register('title', {
-                required: 'Le titre est requis',
-                minLength: { value: 3, message: 'Le titre doit faire au moins 3 caractères' }
-              })}
-            />
-            {errors.title && (
-              <span className="text-sm text-red-500">{errors.title.message}</span>
-            )}
-          </div>
+        <Card>
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
+              <div>
+                <Label htmlFor="title" className="text-lg font-medium">Titre</Label>
+                <Input
+                  id="title"
+                  className="mt-1"
+                  {...register('title', {
+                    required: 'Le titre est requis',
+                    minLength: { value: 3, message: 'Le titre doit faire au moins 3 caractères' }
+                  })}
+                />
+                {errors.title && (
+                  <span className="text-sm text-red-500 mt-1">{errors.title.message}</span>
+                )}
+              </div>
 
-          
-          <div>
-            <Label htmlFor="content">Contenu</Label>
-            <Textarea
-              id="content"
-              {...register('description', {
-                required: 'Le contenu est requis',
-                minLength: { value: 10, message: 'Le contenu doit faire au moins 10 caractères' }
-              })}
-              rows={10}
-            />
-            {errors.description && (
-              <span className="text-sm text-red-500">{errors.description.message}</span>
-            )}
-          </div>
+              <div>
+                <Label htmlFor="content" className="text-lg font-medium">Contenu (Markdown supporté)</Label>
+                <Controller
+                  name="description"
+                  control={control}
+                  rules={{
+                    required: 'Le contenu est requis',
+                    minLength: { value: 10, message: 'Le contenu doit faire au moins 10 caractères' }
+                  }}
+                  render={({ field }) => (
+                    <MDEditor
+                      {...field}
+                      className="mt-1"
+                      height={300}
+                      preview="edit"
+                    />
+                  )}
+                />
+                {errors.description && (
+                  <span className="text-sm text-red-500 mt-1">{errors.description.message}</span>
+                )}
+              </div>
 
-          <div className="space-y-4">
-            <Label htmlFor="image">Image du post</Label>
-            <div className="flex items-center gap-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => document.getElementById('image')?.click()}
-                className="w-full"
-              >
-                <Upload className="w-4 h-4 mr-2" />
-                Choisir une image
-              </Button>
-              <Input
-                id="image"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                {...register('file', {
-                  required: 'Une image est requise',
-                  validate: {
-                    fileSize: (files) => !files[0] || files[0].size <= 5 * 1024 * 1024 || 'L\'image ne doit pas dépasser 5MB',
-                    fileType: (files) => !files[0] || files[0].type.startsWith('image/') || 'Le fichier doit être une image'
-                  }
-                })}
-                onChange={(e) => {
-                  register('file').onChange(e);
-                  handleImageChange(e);
-                }}
-              />
-            </div>
-            {errors.file && (
-              <span className="text-sm text-red-500">{errors.file.message}</span>
-            )}
-
-            {imagePreview && (
-              <Card className="relative p-2">
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="icon"
-                  className="absolute -top-2 -right-2 w-6 h-6"
-                  onClick={removeImage}
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-                <div className="relative aspect-video rounded-lg overflow-hidden">
-                  <Image
-                    width={200}
-                    height={200}
-                    src={imagePreview}
-                    alt="Preview"
-                    className="object-cover w-full h-full"
+              <div className="space-y-4">
+                <Label htmlFor="image" className="text-lg font-medium">Image du post</Label>
+                <div className="flex items-center gap-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => document.getElementById('image')?.click()}
+                    className="w-full"
+                  >
+                    <Upload className="w-4 h-4 mr-2" />
+                    Choisir une image
+                  </Button>
+                  <Input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    {...register('file', {
+                      required: 'Une image est requise',
+                      validate: {
+                        fileSize: (files) => !files[0] || files[0].size <= 5 * 1024 * 1024 || 'L\'image ne doit pas dépasser 5MB',
+                        fileType: (files) => !files[0] || files[0].type.startsWith('image/') || 'Le fichier doit être une image'
+                      }
+                    })}
+                    onChange={(e) => {
+                      register('file').onChange(e);
+                      handleImageChange(e);
+                    }}
                   />
                 </div>
-                {selectedImage && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {selectedImage.name} - {(selectedImage.size / 1024 / 1024).toFixed(2)}MB
-                  </p>
+                {errors.file && (
+                  <span className="text-sm text-red-500 mt-1">{errors.file.message}</span>
                 )}
-              </Card>
-            )}
 
-            <p className="text-sm text-muted-foreground">
-              Formats acceptés: JPG, PNG, GIF (max 5MB)
-            </p>
-          </div>
+                {imagePreview && (
+                  <Card className="relative p-2 mt-4">
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      className="absolute -top-2 -right-2 w-6 h-6"
+                      onClick={removeImage}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                    <div className="relative aspect-video rounded-lg overflow-hidden">
+                      <Image
+                        width={200}
+                        height={200}
+                        src={imagePreview}
+                        alt="Preview"
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                    {selectedImage && (
+                      <p className="text-sm text-muted-foreground mt-2">
+                        {selectedImage.name} - {(selectedImage.size / 1024 / 1024).toFixed(2)}MB
+                      </p>
+                    )}
+                  </Card>
+                )}
 
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="w-full"
-          >
-            {isLoading ? 'Création...' : 'Créer le post'}
-          </Button>
-        </form>
+                <p className="text-sm text-muted-foreground">
+                  Formats acceptés: JPG, PNG, GIF (max 5MB)
+                </p>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full"
+              >
+                {isLoading ? 'Création...' : 'Créer le post'}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </ProtectedRoute>
   );
 }
+

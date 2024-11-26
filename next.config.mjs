@@ -9,6 +9,12 @@ const nextConfig = {
                 pathname: '/**',
             },{
                 protocol: 'https',
+                hostname: 'opengraph.githubassets.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'example.com',
                 port: '',
                 pathname: '/**',
@@ -28,6 +34,11 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'img.shields.io',
+                port: '',
+                pathname: '/**'
+            },{
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
                 port: '',
                 pathname: '/**'
             },

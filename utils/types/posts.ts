@@ -1,5 +1,5 @@
 export interface PostsInterface{
-    id: number,
+    _id: number,
     "title": string,
     "slug": string,
     "description": string,
@@ -12,8 +12,8 @@ export interface PostsInterface{
 }
 
 export interface CommentInterface{
-    id: string,
+    _id: string,
     message: string,
     pseudo: string,
-    created_at:string
+    createdAt:string
 }

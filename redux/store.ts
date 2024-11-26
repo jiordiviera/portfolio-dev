@@ -11,7 +11,7 @@ import authReducer from './slices/auth/authSlice'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'posts'],
+    whitelist: ['auth'],
     // blacklist: ['comments']
 }
 

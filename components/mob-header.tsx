@@ -1,23 +1,24 @@
 'use client'
 
-import { useState } from 'react'
+import React,{ useState } from 'react'
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Home, Briefcase, Newspaper, Mail, Menu, Settings, User, Coffee, Package } from "lucide-react"
+import { Home, Briefcase, Newspaper, Mail, Menu, Coffee, Package } from 'lucide-react'
 import Link from "next/link"
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
 type NavItem = {
-  name: string
-  href: string
-  icon: React.ReactNode
+    name: string
+    href: string
+    icon: React.ReactNode
 }
 
 type MenuOption = {
-  name: string
-  href: string
-  icon: React.ReactNode
+    name: string
+    href: string
+    icon: React.ReactNode
 }
 
 export const MobHeader = () => {
@@ -70,7 +71,16 @@ export const MobHeader = () => {
                                     className="h-full flex flex-col"
                                 >
                                     <SheetHeader className="text-left pb-4 border-b border-border">
-                                        <SheetTitle className="text-2xl font-bold">More Options</SheetTitle>
+                                        <div className="flex items-center space-x-3">
+                                            <Image
+                                                src="https://avatars.githubusercontent.com/u/157500676?v=4&size=64"
+                                                alt="Jiordi Viera"
+                                                width={40}
+                                                height={40}
+                                                className="rounded-full"
+                                            />
+                                            <SheetTitle className="text-2xl font-bold">Jiordi Viera</SheetTitle>
+                                        </div>
                                     </SheetHeader>
                                     <nav className="flex-grow py-6">
                                         {menuOptions.map((option, index) => (
@@ -103,3 +113,4 @@ export const MobHeader = () => {
         </nav>
     )
 }
+

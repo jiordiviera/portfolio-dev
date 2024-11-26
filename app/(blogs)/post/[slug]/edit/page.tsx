@@ -16,29 +16,30 @@ export default function EditPostPage() {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { id } = useParams();
+  const { slug } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const currentPost = useAppSelector((state) => state.posts.currentPost);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchPostBySlug(id as string));
+    if (slug) {
+      dispatch(fetchPostBySlug(slug as string));
     }
-  }, [id, dispatch]);
+  }, [slug, dispatch]);
 
   useEffect(() => {
     if (currentPost) {
       setValue('title', currentPost.title);
-      setValue('content', currentPost.content);
+      setValue('description', currentPost.description);
     }
   }, [currentPost, setValue]);
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-      await dispatch(updatePost({ id: id as string, postData: data })).unwrap();
+      const response= await dispatch(updatePost({ id: currentPost?._id as string, postData: data })).unwrap();
+      console.log(response)
       toast.success('Post mis à jour avec succès');
-      router.push(`/post/${id}`);
+      router.push(`/post/${response.slug}`);
     } catch (error) {
       toast.error('Erreur lors de la mise à jour du post');
     } finally {
@@ -58,9 +59,9 @@ export default function EditPostPage() {
           </div>
           <div
 >
-            <Label htmlFor="content">Contenu</Label>
-            <Textarea id="content" {...register('content', { required: true })} rows={10} />
-            {errors.content && <span className="text-red-500">Ce champ est requis</span>}
+            <Label htmlFor="description">Contenu</Label>
+            <Textarea id="description" {...register('description', { required: true })} rows={10} />
+            {errors.description && <span className="text-red-500">Ce champ est requis</span>}
           </div>
           <Button type="submit" disabled={isLoading}>
             {isLoading ? 'Mise à jour...' : 'Mettre à jour le post'}
