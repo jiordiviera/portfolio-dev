@@ -5,6 +5,7 @@ import "./globals.css";
 import {cn} from "@/utils/cn";
 import GlobalProvider from "@/components/global-provider";
 import { Analytics } from "@vercel/analytics/react"
+import Script from "next/script";
 
 const poppins = Poppins(
     {
@@ -52,7 +53,8 @@ export default function RootLayout({ children }: Readonly<{children: React.React
         <html lang="en" suppressHydrationWarning>
          <head>
         {/* Google Tag Manager */}
-        <script
+        <Script
+          id="google-tag-manager"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -65,11 +67,12 @@ export default function RootLayout({ children }: Readonly<{children: React.React
         />
                {/* End Google Tag Manager */}
                 {/* Google Analytics */}
-        <script
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-7TBRH8PB79"
         />
-        <script
+        <Script
+          id="google-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -81,7 +84,8 @@ export default function RootLayout({ children }: Readonly<{children: React.React
         />
         {/* End Google Analytics */}
          {/* Microsoft Clarity */}
-        <script
+        <Script
+          id="microsoft-clarity"
           type="text/javascript"
           dangerouslySetInnerHTML={{
             __html: `
