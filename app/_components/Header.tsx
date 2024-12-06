@@ -29,7 +29,6 @@ const navLinks: NavLink[] = [
   { href: "/work", label: "Work", icon: <Briefcase className="w-5 h-5" /> },
   { href: "/blog", label: "Blog", icon: <Newspaper className="w-5 h-5" /> },
   { href: "/contact", label: "Contact", icon: <Mail className="w-5 h-5" /> },
-  { href: "/skills", label: "Skills", icon: <Coffee className="w-5 h-5" /> },
   { href: "/packages", label: "Packages", icon: <Package className="w-5 h-5" /> },
 ]
 

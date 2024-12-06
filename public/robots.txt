@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-Sitemap: https://devjiordi.vercel.app/sitemap.xml
+# Host
+Host: https://www.dev-jiordi.site
+
+# Sitemaps
+Sitemap: https://www.dev-jiordi.site/sitemap.xml

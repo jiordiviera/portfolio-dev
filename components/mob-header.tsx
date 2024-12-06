@@ -33,7 +33,6 @@ export const MobHeader = () => {
     ]
 
     const menuOptions: MenuOption[] = [
-        { name: 'Skills', href: '/skills', icon: <Coffee className="w-5 h-5" /> },
         { name: 'Packages', href: '/packages', icon: <Package className="w-5 h-5" /> },
     ]
 
@@ -62,7 +61,7 @@ export const MobHeader = () => {
                     </SheetTrigger>
                     <AnimatePresence>
                         {isOpen && (
-                            <SheetContent side="bottom" className="h-[50vh] rounded-t-3xl">
+                            <SheetContent side="bottom" className="h-[30vh] rounded-t-3xl">
                                 <motion.div
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -113,4 +112,3 @@ export const MobHeader = () => {
         </nav>
     )
 }
-
